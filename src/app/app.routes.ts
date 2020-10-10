@@ -1,43 +1,17 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component'
-import { MovieComponent } from './components/InTheater/movie/movie.component';
-import {GenresComponent} from './components/InTheater/genres/genres.component';
-import {ActorComponent} from './components/actor/actor.component';
-import {LoginComponent} from './components/ui/login/login.component';
-import {PageNotFoundComponent} from './components/ui/page-not-found/page-not-found.component';
-import {GenresListComponent} from './components/InTheater/genres-list/genres-list.component';
-import {RegisterComponent} from './components/ui/register/register.component';
-import {SettingsComponent} from './components/user/settings/settings.component';
-import {ProfileComponent} from './components/user/profile/profile.component';
-import {TvShowComponent} from './components/OnTV/tv-show/tv-show.component';
-import {AllMoviesComponent} from './components/InTheater/all-movies/all-movies.component';
-import {AllTvShowsComponent} from './components/OnTV/all-tv-shows/all-tv-shows.component';
-import {AuthGuard} from './core/auth.guard';
-import {GenresTvComponent} from './components/OnTV/genres-tv/genres-tv.component';
-import {SearchMoviesComponent} from './components/search/search-movies.component';
-import {SearchmoviesComponent} from './components/searchmovies/searchmovies.component';
-import {SearchComponent} from './components/search/search.component';
-import {SeasonsComponent} from './components/OnTV/seasons/seasons.component';
-import {EpisodesComponent} from './components/OnTV/episodes/episodes.component';
+import {Routes} from '@angular/router';
+import {LoginComponent} from './login/login.component';
+import {HomeComponent} from './home/home.component';
+import {MenuComponent} from './core/menu/menu.component';
 
 export const appRoutes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', redirectTo: 'login',pathMatch:'full'},
+  { path: 'menu', children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+      }
+
+    ],component: MenuComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'all-movies', component: AllMoviesComponent},
-  { path: 'all-tv-shows', component: AllTvShowsComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  { path: 'movie/:id', component: MovieComponent },
-  { path: 'tv-show/:id', component: TvShowComponent },
-  { path: 'genres', component: GenresListComponent },
-  { path: 'genres/:id/:name', component: GenresComponent },
-  { path: 'genres-tv/:id/:name', component: GenresTvComponent },
-  { path: 'actor/:id', component: ActorComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'searchFilm', component: SearchComponent},
-  { path: 'search/:query', component: SearchMoviesComponent},
-  { path: 'tv-show/:id/seasons/:seasons', component: SeasonsComponent },
-  { path: 'home', component: SearchmoviesComponent },
-  { path: 'tv-show/:id/seasons/:seasons/episode/:episode', component: EpisodesComponent },
-  { path: '**', component: PageNotFoundComponent}
+  { path: '**', redirectTo: 'login'}
 ];
