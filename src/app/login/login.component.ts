@@ -30,9 +30,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    if (await this.authService.checkAuthenticated()) {
-      await this.router.navigate([this.returnUrl]);
-    }
   }
 
   async onSubmit() {
